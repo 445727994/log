@@ -21,6 +21,6 @@ class Cate extends Model {
 	const PAGE = 20;
 	const SEARCH = ['id', 'user_id', 'name', 'type'];
 	public static function selectOption($where = []) {
-		return Cate::where($where)->pluck('name', 'id')->toArray();
+		return self::where($where)->pluck('name', 'id')->toArray();
 	}
 }

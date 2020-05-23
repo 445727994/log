@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://log.mn'),
+    'url' => env('APP_URL', 'http://frps.gp93.cn'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -139,6 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -174,7 +175,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\RepositoryServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
     ],
 
     /*
@@ -189,7 +193,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -203,6 +206,7 @@ return [
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
+        'EsayWechat'=>Overtrue\LaravelWeChat\Facade::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
@@ -225,7 +229,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
     ],
 
 ];

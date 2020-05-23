@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
-
+    // 'default' => 'redis',
+    'default' => env('QUEUE_DRIVER', 'database'),
     /*
     |--------------------------------------------------------------------------
     | Queue Connections
@@ -31,7 +31,8 @@ return [
     'connections' => [
 
         'sync' => [
-            'driver' => 'sync',
+            // 'driver' => 'sync',
+            'driver'=>'redis'
         ],
 
         'database' => [
@@ -51,11 +52,12 @@ return [
 
         'sqs' => [
             'driver' => 'sqs',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'key' => env('AWS_ACCESS_KEY_ID', 'your-public-key'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY','your-secret-key'),
             'prefix' => env('SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
             'queue' => env('SQS_QUEUE', 'your-queue-name'),
             'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+
         ],
 
         'redis' => [
@@ -64,6 +66,7 @@ return [
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
             'block_for' => null,
+            'expire'=>600
         ],
 
     ],

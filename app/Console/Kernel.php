@@ -24,8 +24,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //单个执行
+        //php artisan spider:tb tbkGoods > '/dev/null' 2>&1
+        $schedule->command('spider:tb tbkGoods')->everyMinute(); //拉去
+        //$schedule->command('spider:tb updateGoods')->everyMinute();//->hourly(); //更新
+        //$schedule->command('spider:tb deleteGoods')->everyMinute();//->hourly(); //删除
         // $schedule->command('inspire')
-        //          ->hourly();
+        //       timingItems    ->hourly();
     }
 
     /**

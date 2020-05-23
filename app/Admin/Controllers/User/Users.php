@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers\User;
 
 use App\Models\User\User;
+use App\Models\User\WechatLog;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -22,8 +23,7 @@ class Users extends AdminController {
 	 * @return Grid
 	 */
 	protected function grid() {
-		$grid = new Grid(new User);
-
+		$grid = new Grid(new User());
 		$quickSearch = $arraySearch = [];
 		foreach (User::FIELD as $key => $value) {
 			if (isset($value['sort'])) {
@@ -62,7 +62,7 @@ class Users extends AdminController {
 		foreach (User::FIELD as $key => $value) {
 			$show->field($key, __($value['name']));
 		}
-		$show->field('password', __('Password'));
+
 		return $show;
 	}
 
@@ -72,7 +72,7 @@ class Users extends AdminController {
 	 * @return Form
 	 */
 	protected function form() {
-		$form = new Form(new User);
+		$form = new Form(new User());
 		foreach (User::FIELD as $key => $value) {
 			if (isset($value['type'])) {
 				$fun = $value['type'];
@@ -83,7 +83,9 @@ class Users extends AdminController {
 		$form->saving(function (Form $form) {
 			if ($form->password && $form->model()->password != $form->password) {
 				$form->password = bcrypt($form->password);
-			}
+			}else{
+
+            }
 		});
 		return $form;
 	}

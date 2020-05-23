@@ -12,7 +12,7 @@ class Bill extends Model {
 	//定义普通字段
 	const FIELD = [
 		'id' => ['sort' => true, 'name' => '序号', 'quickSearch' => 'equal'],
-		'user.name' => ['name' => '用户', 'type' => 'select', 'quickSearch' => 'like', 'option' => 'App\Models\User\User'],
+		'user.name' => ['name' => '用户', 'type' => 'select', 'quickSearch' => 'like', 'option' => 'App\Models\User'],
 		'money' => ['name' => '金额', 'type' => 'decimal', 'quickSearch' => 'like'],
 		'type' => ['name' => '类型', 'type' => 'text', 'quickSearch' => 'like'],
 		'bank_id' => [

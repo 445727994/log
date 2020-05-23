@@ -14,4 +14,10 @@ Route::group([
 	$router->resource('bills', User\Bills::class);
 	$router->resource('banks', User\Banks::class);
 	$router->resource('cates', User\Cates::class);
+    $router->resource('ad-cates', Ads\AdCateController::class);
+    $router->resource('ads', Ads\AdsController::class);
+
+    $router->get('app-settings', 'Setting\AppSettingController@set');
+    $router->any('app-settings/save', 'Setting\AppSettingController@setUpdate');
+
 });

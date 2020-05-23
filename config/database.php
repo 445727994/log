@@ -50,7 +50,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'log'),
             'username' => env('DB_USERNAME', 'log'),
-            'password' => env('DB_PASSWORD', 'userlogs'),
+            'password' => env('DB_PASSWORD', 'iZZX3mLG44dcDxrK'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -127,7 +127,7 @@ return [
         ],
 
         'default' => [
-            'url' => env('REDIS_URL'),
+            //'url' => env('REDIS_URL'),
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', 6379),

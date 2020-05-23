@@ -35,10 +35,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
+//        $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-
+        $this->mapV1ApiRoutes();
+        $this->mapV1H5Routes();
         //
     }
 
@@ -63,11 +64,25 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+//    protected function mapApiRoutes()
+//    {
+//        Route::prefix('api')
+//            ->middleware('api')
+//            ->namespace($this->namespace)
+//            ->group(base_path('routes/api.php'));
+//    }
+
+    protected  function mapV1ApiRoutes(){
+        Route::middleware('api')->namespace($this->namespace.'\V1')->prefix('api')->group(base_path('routes/v1/api.php'));
     }
+    protected  function mapV1H5Routes(){
+        Route::middleware(['web','wechat.oauth','h5'])->namespace($this->namespace.'\V1')->group(base_path('routes/v1/h5.php'));
+    }
+//    protected function mapApiV1Routes()
+//    {
+//        Route::prefix('api')
+//            ->middleware('api')
+//            ->namespace($this->namespace)
+//            ->group(base_path('routes/api/v1/api.php'));
+//    }
 }

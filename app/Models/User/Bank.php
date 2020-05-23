@@ -26,6 +26,6 @@ class Bank extends Model {
 	const PAGE = 20;
 	const SEARCH = ['id', 'user_id', 'bank_id', 'type'];
 	public static function selectOption($where = []) {
-		return Bank::where($where)->pluck('name', 'id')->toArray();
+		return self::where($where)->pluck('name', 'id')->toArray();
 	}
 }

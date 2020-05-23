@@ -15,7 +15,6 @@ class Banks extends AdminController {
 	 * @var string
 	 */
 	protected $title = '信用卡';
-
 	/**
 	 * Make a grid builder.
 	 *
@@ -23,7 +22,11 @@ class Banks extends AdminController {
 	 */
 	protected function grid() {
 		$grid = new Grid(new Bank);
-
+        $grid->disableCreateButton();
+        $grid->disableFilter();
+        $grid->disableRowSelector();
+        $grid->disableActions();
+        $grid->disableColumnSelector();
 		$grid->column('id', __('Id'));
 		$grid->column('user.name', __('User id'));
 		$grid->column('name', __('Name'));

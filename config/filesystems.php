@@ -42,12 +42,31 @@ return [
     */
 
     'disks' => [
+//        'qiniu' => [
+//            'driver'     => 'qiniu',
+//            'access_key' => env('QINIU_ACCESS_KEY', ''),
+//            'secret_key' => env('QINIU_SECRET_KEY', ''),
+//            'bucket'     => env('QINIU_BUCKET', ''),
+//            'domain'     => env('QINIU_DOMAIN', ''), // or host: https://xxxx.clouddn.com
+//        ],
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+                'default'   => 'tbk.gp93.cn', //你的七牛域名
+                'https'     => 'tbk.gp93.cn',         //你的HTTPS域名
+                'custom'    => 'tbk.gp93.cn',                //你的自定义域名
+            ],
+            'access_key'=> 'n6iyg7J3IYTwb_XVa4eTptDCuqLYeTKxIib5vm6D',  //AccessKey
+            'secret_key'=> 'g8Otjb3mgOlu8h5FHqKlq1B4Qukrdb5HPgNV2PsU',  //SecretKey
+            'bucket'    => 'yhclog',  //Bucket名字
+            'notify_url'=> 'http://tbk.gp93.cn',  //持久化处理回调地址
+            'url'       => 'http://tbk.gp93.cn',  // 填写文件访问根url
+        ],
 
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
         ],
-
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
@@ -63,7 +82,12 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
-
+        'admin' => [
+            'driver'     => 'local',
+            'root'       => public_path('upload'),
+            'visibility' => 'public',
+            'url' => env('APP_URL').'/upload/',
+        ],
     ],
 
 ];

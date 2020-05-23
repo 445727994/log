@@ -36,15 +36,19 @@ return [
 	*/
 
 	'guards' => [
-		'web' => [
-			'driver' => 'session',
-			'provider' => 'users',
-		],
-
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'h5wechat' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
 		'api' => [
-			'driver' => 'token',
-			'provider' => 'users',
-			'hash' => false,
+			//'driver' => 'token',
+            'driver' => 'jwt',
+            'provider' => 'users',
+	//		'hash' => false,
 		],
 	],
 
@@ -68,9 +72,8 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
-			'model' => App\Models\User::class,
+			'model' =>'App\Models\Auth\User',
 		],
-
 		// 'users' => [
 		//     'driver' => 'database',
 		//     'table' => 'users',
