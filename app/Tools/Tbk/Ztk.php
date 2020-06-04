@@ -21,11 +21,9 @@ class Ztk{
         }else{
             $data=$common_data;
         }
-        var_dump($data);
         $resp=Curl::to($url.$api)
             ->withData($data)
             ->get();
-        var_dump($resp);exit;
         if($second==true){
             $resp=json_decode($resp,true);
             if(isset($resp['url'])){

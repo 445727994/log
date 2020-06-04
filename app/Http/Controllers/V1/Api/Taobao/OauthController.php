@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting\AppSetting;
 use App\Models\Setting\Setting;
 use App\Models\Taoke\UserOauth;
+use App\Tools\Tbk\TbSdk;
 use App\Tools\Tbk\V1\Taobao;
 use Illuminate\Support\Facades\Log;
 use Ixudra\Curl\Facades\Curl;
@@ -39,25 +40,30 @@ class OauthController extends Controller
             }else{
                 $rest = json_decode($data);
             }
-var_dump(  $rest);exit;
             if (isset($rest->access_token)){
                 $isset= UserOauth::query()->where('taobao',$rest->taobao_user_id)->value('user_id');
                 if($isset && $isset!=$userid){
                     $arr= ['setting' =>$AppSetting,'status'=>1,'msg'=>Setting::getSetting('oauth_repeat')];
                 }else{
-                    UserOauth::query()->updateOrCreate([
-                        'user_id' => $userid,
-                    ],[
+                    $updateArr=[
                         'session_key' => $rest->access_token ?? '',
                         'nickname' => urldecode($rest->taobao_user_nick),
                         'openid' => $rest->taobao_user_id ?? '',
                         'taobao' => $rest->taobao_user_id ?? '',
                         'open_uid'=>$rest->taobao_opne_uid??"",
                         'expire_time' => date('Y-m-d H:i:s', substr($rest->expire_time,0,-3)),
-                    ]);
+                    ];
+                    $relation=TbSdk::getInstance()->publisherSave('6200f131dffc671bfc433ZZc773a35c15492be3a90dc2c71121372610',$hashid,'');
+                    if($relation){
+                        $updateArr['relation']=$relation->relation_id??"";
+                        $updateArr['account_name']=$relation->account_name??"";
+                        $updateArr['special_id']=$relation->special_id??"";
+                    }
+                    UserOauth::query()->updateOrCreate([
+                        'user_id' => $userid,
+                    ],$updateArr);
                     $arr= ['setting' =>$AppSetting,'status'=>1,'msg'=>Setting::getSetting('oauth_suc')];
                 }
-
             }else{
                 $arr= ['setting' =>$AppSetting,'status'=>1,'msg'=>Setting::getSetting('oauth_error')];
             }

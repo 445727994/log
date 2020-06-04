@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\Taoke\GetOrder;
+use App\Tools\Tbk\TbSdk;
 use App\Tools\Tbk\V1\Taobao;
 use App\Tools\Tbk\Ztk;
 use Vinkla\Hashids\Facades\Hashids;
@@ -12,6 +13,10 @@ class RedisController extends Controller
 
     public function testRedis()
     {
+        $id=25;
+        $ids=Hashids::encode($id);
+        $tbkSdk=TbSdk::getInstance()->publisherSave('6200f131dffc671bfc433ZZc773a35c15492be3a90dc2c71121372610',$ids,'');
+        exit;
      // $res=  Ztk::invitedCoed(2);
       $code='';
       $id=3;
